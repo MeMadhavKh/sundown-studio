@@ -1,0 +1,851 @@
+@font-face {
+  font-family: "Neuehaas-medium";
+  src: url(./NeueHaasDisplayMediu.ttf);
+  font-weight: medium;
+}
+@font-face {
+  font-family: "Neuehaas-light";
+  src: url(./NeueHaasDisplayLight.ttf);
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Neuehaas-roman";
+  src: url(./NeueHaasDisplayRoman.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Neuehaas-medium";
+}
+*::selection {
+  display: none;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+#loader {
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  transition: all ease 0.7s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#loader h1{
+  font-size: 4vw;
+  color: transparent;
+  background: linear-gradient(to right, orange, orangered);
+  position: absolute;
+  opacity: 0;
+  -webkit-background-clip: text;
+  animation-name: load;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-timing-function: linear;
+}
+#loader h1:nth-child(2){
+  animation-delay: 2s;
+}
+#loader h1:nth-child(3){
+  animation-delay: 3s;
+}
+#main {
+  position: relative;
+  z-index: 10;
+}
+#page1 {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #efeae3;
+  position: relative; /* jab bhi koi parent hai usko position relative dene sai uske children control mai rehte hai*/
+  padding: 0 2vw;
+}
+nav {
+  padding: 2vw 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 100;
+}
+nav h3{
+  display: none;
+}
+#nav-part2 {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+#nav-part2 h4 {
+  padding: 10px 20px;
+  border: 1px solid #0000003c;
+  border-radius: 50px;
+  font-weight: 500;
+  color: #000000bb;
+  position: relative; /*taki bache na bigde position absolute lekar*/
+  font-size: 1.2rem;
+  transition: all ease 0.4s;
+  overflow: hidden;
+}
+#nav-part2 h4::after {
+  content: ""; /*content dena anivarya hai*/
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  left: 0;
+  bottom: -100%;
+  transition: all ease 0.4s;
+  border-radius: 50%;
+}
+#nav-part2 h4:hover::after {
+  bottom: 0;
+  border-radius: 0;
+}
+#nav-part2 h4 a {
+  text-decoration: none;
+  color: #000000bb;
+  position: relative;
+  z-index: 9;
+  font-family: "Neuehaas-light";
+}
+#nav-part2 h4:hover a {
+  color: #fff;
+}
+#center {
+  height: 65vh;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 1px solid #0000003c;
+  padding-bottom: 2.5vw;
+}
+#center h1 {
+  font-size: 10vw;
+  line-height: 9vw;
+  text-align: right;
+}
+#left h3 {
+  width: 25vw;
+  font-size: 1.8vw;
+  line-height: 2vw;
+}
+#page1 video {
+  width: 100%;
+  border-radius: 30px;
+  margin-top: 4vw;
+  position: relative;
+}
+#hero-shape {
+  position: absolute;
+  width: 46vw;
+  height: 36vw;
+  right: 0;
+  top: 65vh;
+}
+#hero1 {
+  height: 100%;
+  width: 100%;
+  background-color: #fe320a;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  filter: blur(20px);
+  position: absolute;
+}
+#hero2 {
+  height: 30vw;
+  width: 30vw;
+  background-color: #fe320a;
+  border-radius: 50%;
+  position: absolute;
+  animation-name: anime2;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  background: linear-gradient(#fe320a, #fe3f0a);
+}
+#hero3 {
+  height: 30vw;
+  width: 30vw;
+  background: linear-gradient(#fe320a, #fe3f0a);
+  border-radius: 50%;
+  position: absolute;
+  animation-name: anime1;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+}
+#page2 {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #efeae3;
+  padding: 8vw 0;
+  position: relative;
+}
+#moving-text {
+  white-space: nowrap;
+}
+#moving-text::-webkit-scrollbar {
+  display: none;
+}
+#moving-text h1 {
+  font-size: 9vw;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.container {
+  white-space: nowrap; /*childrens agli line mai nhi aayenge, ek hi line mai aajayenge*/
+  display: inline-block;
+  animation-name: move;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+#circle {
+  height: 70px;
+  width: 70px;
+  background-color: #fe320a;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 1vw 2vw;
+}
+#page2-bottom {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6vw 5vw;
+  position: relative;
+}
+#page2-bottom h1 {
+  font-size: 4vw;
+  width: 60%;
+  line-height: 3.5vw;
+  font-family: "Neuehaas-medium";
+  font-weight: normal;
+  z-index: 100;
+}
+#bottom-part2 {
+  width: 25%;
+}
+#bottom-part2 img {
+  width: 100%;
+  border-radius: 15px;
+}
+#bottom-part2 p {
+  font-family: "Neuehaas-roman";
+  margin-top: 2vw;
+}
+#page2 #gooey {
+  height: 60vh;
+  z-index: 10;
+  width: 35vw;
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(to top, #fe320a, #ff671b);
+  top: 55%;
+  left: 20%;
+  animation-name: gooey;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+#page3 {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #efeae3;
+  padding: 4vw 0;
+  position: relative;
+}
+#page3 .elem {
+  height: 150px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 2vw;
+  border-top: 0.8px solid #1c1c1c;
+  overflow: hidden;
+  cursor: pointer;
+}
+.elem h2 {
+  font-size: 3.5vw;
+  font-family: "Neuehaas-roman";
+  font-weight: 900;
+  position: relative;
+  z-index: 9;
+}
+#page3 .elem .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: -100%;
+  background-color: orange;
+  transition: all ease 0.25s;
+}
+#page3 .elem:hover .overlay {
+  top: 0;
+}
+#fixed-image {
+  height: 30vw;
+  width: 24vw;
+  border-radius: 10px;
+  position: fixed;
+  z-index: 99;
+  left: 50%;
+  top: 25%;
+  display: none;
+  background-size: cover;
+  background-position: center;
+}
+#page3 h4 {
+  padding: 10px 35px 10px 20px;
+  border: 1px solid #0000003c;
+  border-radius: 50px;
+  font-weight: 500;
+  color: #000000bb;
+  position: relative; /*taki bache na bigde position absolute lekar*/
+  font-size: 1.2rem;
+  transition: all ease 0.4s;
+  overflow: hidden;
+  text-align: center;
+  width: 10%;
+  margin-left: 2vw;
+}
+#page3 h4::after {
+  content: ""; /*content dena anivarya hai*/
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  left: 0;
+  bottom: -100%;
+  transition: all ease 0.4s;
+  border-radius: 50%;
+}
+#page3 h4:hover::after {
+  bottom: 0;
+  border-radius: 0;
+}
+#page3 h4 a {
+  text-decoration: none;
+  color: #000000bb;
+  position: relative;
+  z-index: 9;
+  font-family: "Neuehaas-light";
+}
+#page3 h4:hover a {
+  color: #fff;
+}
+#page3 h4 img{
+  width: 20px;
+  position: absolute;
+  top: 10%;
+  margin-left: 10px;
+}
+#page4 {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #efeae3;
+  padding: 10vw 2vw;
+  position: relative;
+}
+#page4 .page4Top{
+  background-color: #000;
+  border-radius: 20px;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  margin-bottom: 100px;
+  position: relative;
+  overflow: hidden;
+}
+.page4Top .topleft{
+  padding: 13.5vw 10.5vw;
+  width: 50%;
+}
+.topleft .topleft-headings h2{
+  border-left: 3px solid #4F4A45;
+}
+.page4Top .topleft .topleft-headings h2{
+  font-size: 4.25em;
+  padding-left: 2vw;
+  color: #efeae3;
+  font-family: "Neuehaas-medium";
+  cursor: pointer;
+  font-weight: 500;
+  line-height: 1em;
+}
+.topleft .topleft-headings h2:nth-child(1){
+  border-left: 3px solid #fe320a;
+}
+.topleft .topleft-headings h2:nth-child(2),
+.topleft .topleft-headings h2:nth-child(3){
+  color: #4F4A45;
+}
+.topleft p{
+  color: #fff;
+  margin-top: 40px;
+  font-family: "Neuehaas-roman";
+  font-weight: 200;
+  font-size: 1.1vw;
+  width: 110%;
+  line-height: 1.6vw;
+}
+.page4Top .topright img{
+  height: 100%;
+  width: 100%;
+  text-align: right;
+  background-position: center;
+  border-radius: 0px;
+  scale: 1.1;
+}
+.fade{
+  animation: fade 0.7s linear forwards;
+}
+.swiper {
+  width: 100%;
+  height: 100%;
+  cursor: all-scroll;
+}
+.swiper-slide {
+  border-left: 1px solid #ccc;
+  width: 40%;
+  height: 80%;
+  padding: 1vw 3vw;
+}
+.swiper-slide .richtext p{
+  font-family: "Neuehaas-roman";
+}
+#page5 {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 90;
+}
+#footer {
+  z-index: 9;
+  height: 100vh;
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: 3vw 5vw;
+  position: fixed;
+}
+#footer h1 {
+  font-size: 21vw;
+  border-bottom: 1px solid #4F4A45;
+  z-index: 5;
+}
+#footer-div {
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  margin-bottom: 50px;
+  position: relative;
+}
+.footer-headings{
+  padding: 0 3vw;
+}
+.footer-headings h3 {
+  font-size: 2vw;
+}
+.footer-div-right {
+  margin: 8vw 4vw;
+}
+.footer-div-right h4 {
+  font-family: "Neuehaas-light";
+  font-size: 1.2vw;
+}
+#footer-bottom {
+  display: flex;
+  align-items: center;
+  gap: 20vw;
+  padding-top: 1vw;
+}
+.topfooter{
+  display: flex;
+  gap: 20vw;
+}
+.bottomfooter{
+  display: flex;
+  gap: 20vw;
+}
+#footer-bottom h4{
+  font-family: "Neuehaas-light";
+}
+#footer-bottom h4:nth-child(2) img{
+ transform: translate(-20%,20%);
+}
+.underline{
+  position: relative;
+}
+.underline::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 40%;
+  background-color: #efeae3;
+  transition: all ease 0.5s;
+}
+.underline:hover .bottomfooter h4::after{
+  width: 100%;
+}
+#full-scr{
+  height: 100vh;
+  width: 100%;
+  background-color: #00000070;
+  position: fixed;
+  z-index: 99;
+  top: -100%;
+  transition: all ease 0.5s;
+}
+#full-div1{
+  height: 50%;
+  width: 100%;
+  background-color: #efeae3;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: right;
+  margin-top: 80px;
+}
+#goeey2{
+  width: 120vw;
+  height: 80vh;
+  position: absolute;
+  left: 0;
+  top: -20%;
+}
+#goeey2-part1{
+  position: absolute;
+  left: -10%;
+  top: -5%;
+  height: 80vh;
+  width: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: -10%;
+  animation-name: anime2;
+  animation-iteration-count: infinite;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  background: linear-gradient(#fe320a, #fe3f0a);
+}
+#goeey2-part2{
+  position: absolute;
+  top: -5%;
+  right: -10%;
+  height: 80vh;
+  width: 75%;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  animation-name: anime2;
+  animation-iteration-count: infinite;
+  animation-duration: 4s;
+  animation-timing-function: forwards;
+  animation-direction: alternate;
+  background: linear-gradient(#fe320a, #fe3f0a);
+}
+.elem-responsive{
+  display: none;
+}
+@keyframes anime1 {
+  from {
+    filter: blur(20px);
+    transform: translate(55%, -3%);
+  }
+  to {
+    filter: blur(40px);
+    transform: translate(0%, -10%);
+  }
+}
+@keyframes anime2 {
+  from {
+    filter: blur(20px);
+    transform: translate(5%, -5%);
+  }
+  to {
+    filter: blur(40px);
+    transform: translate(-20%, 20%);
+  }
+}
+@keyframes move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes gooey {
+  from {
+    filter: blur(20px);
+    transform: translate(10%, -10%) skew(0deg); /* skew sai shape upar niche hota hai, iski value degree mai hoti hai*/
+  }
+  to {
+    filter: blur(30px);
+    transform: translate(10%, -10%) skew(-10deg);
+  }
+}
+@keyframes load { /*ye load animation basically is a timeline from 10% to 90%, where the element is visible*/
+  0%{
+    opacity: 0;
+  }
+  10%{
+    opacity: 1;
+  }
+  90%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+@keyframes fade{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+@media (max-width: 600px){
+  #loader h1{
+    font-size: 9vw;
+  }
+  #page1{
+    min-height: 100vh;
+    width: 100vw;
+    padding: 0;
+  }
+  nav{
+    padding: 8vw 5vw;
+    background-color: #efeae3;
+  }
+  nav img{
+    scale: 0.55;
+    transition: all ease 0.2s;
+  }
+  #nav-part2{
+    display: none;
+  }
+  nav h3{
+    display: block;
+    padding: 3vw 5vw;
+    border: 1px solid #ababab;
+    font-size: 4vw;
+    border-radius: 50px;
+    padding-left: 10vw;
+    font-family: "Neuehaas-light";
+  }
+  #full-div1{
+  height: 30vh;
+}
+  #full-div1 h1:nth-child(1){
+    margin-top: 125px;
+  }
+  #full-div1 h1{
+    font-size: 12vw;
+    cursor: pointer;
+  }
+  #center{
+    height: 62vh;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    z-index: 9;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    border-bottom: 1px solid #0000003c;
+    padding: 7vw 5vw;
+    padding-bottom: 10vw;
+  }
+  #center h1{
+    font-size: 14vw;
+    text-align: right;
+    line-height: 11vw;
+  }
+  #left h3{
+    width: 80%;
+    font-size: 5.5vw;
+    line-height: 6vw;
+  }
+  #page1 video{
+    width: 92%;
+    margin-left: 4%;
+    object-position: center;
+    object-fit: cover;
+    height: 70vh;
+    margin-top: 4vw;
+    border-radius: 15px;
+    position: relative;
+  }
+  #hero-shape{
+    height: 35vh;
+    width: 75vw;
+  }
+  #moving-text h1{
+    font-size: 15vw;
+  }
+  #circle{
+    height: 20px;
+    width: 20px;
+    margin: 2vw 2vw;
+  }
+  #page2-bottom{
+    height: 100vh;
+    padding: 10vw 4vw;
+    align-items: flex-start;
+    flex-direction: column;
+    border-bottom: 1px solid #4F4A45;
+  }
+  #page2-bottom h1{
+    font-size: 8vw;
+    line-height: 9vw;
+    width: 90%;
+  }
+  #bottom-part2{
+    width: 70%;
+  }
+  #bottom-part2 img{
+    margin-top: 50px;
+    border-radius: 10px;
+  }
+  #bottom-part2 p{
+    font-size: 3.5vw;
+  }
+  #page2 #gooey{
+    height: 70vh;
+    width: 150vw;
+    filter: blur(100px);
+    z-index: 0;
+    left: -20%;
+    top: 30%;
+  }
+  .swiper-slide {
+    border-left: 1px solid #ccc;
+    width: 60%;
+    height: 50%;
+    padding: 1vw 3vw;
+  }
+  #page2-bottom{
+    z-index: 5;
+  }
+  #goeey{
+    animation: anime1 0.5s linear infinite;
+  }
+  #elem-container{
+    display: none;
+  }
+  .elem-responsive{
+    width: 110vw;
+    min-height: 100vh;
+    display: flex;
+    text-align: left;
+    flex-wrap: wrap;
+  }
+  .elem1{
+    padding: 2vw 3vw;
+    display: flex;
+    flex-direction: column;
+  }
+  .elem1 img{
+    width: 200px;
+    height: 300px;
+    background-position: center;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .elem1 h2{
+    padding: 1.5vw 0;
+  }
+  .elem1 h5{
+    font-family: "Neuehaas-light";
+  }
+  .elem1 h6{
+    color: #4F4A45;
+    font-family: "Neuehaas-light";
+  }
+  #page3 h4{
+    width: 30vw;
+    margin-top: 5vw;
+  }
+  .page4Top{
+    display: flex;
+    flex-direction: column;
+  }
+  .topleft{
+    height: 70vh;
+  }
+  .topleft .topleft-headings h2{
+    width: 50%;
+  }
+  .topleft p{
+    font-size: 3vw;
+    width: 80vw;
+    line-height: 3.5vw;
+  }
+  #footer{
+    height: 70vh;
+    width: 100vw;
+  }
+  #footer-bottom{
+    gap: 50vw;
+  }
+  .footer-headings h3{
+    font-size: 5vw;
+  }
+  .footer-div-right h4{
+    font-size: 3vw;
+  }
+  #footer-bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  #goeey2{
+    height: 30vh;
+    top: 10%;
+  }
+  #goeey2-part1{
+    height: 50vh;
+    width: 60%;
+  }
+  #goeey2-part2{
+    height: 70vh;
+    width: 65%;
+  }
+  #footer-bottom h4{
+    font-size: 2.5vw;
+  }
+  .remove{
+    display: none;
+  }
+}
